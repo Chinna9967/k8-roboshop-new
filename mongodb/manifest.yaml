@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  labels: # deployment labels
+    app: mongodb
+    tier: db
+    project: roboshop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:  # these labels shpuld match with pod labels
+      app: mongodb
+      tier: db
+      project: roboshop
+  template:
+    metadata:
+      labels:
+        app: mongodb
+        tier: db
+        project: roboshop
+    spec:
+      containers:
+      - name: mongodb
+        image: chinna9967/mongodb:1.0.0
+        
