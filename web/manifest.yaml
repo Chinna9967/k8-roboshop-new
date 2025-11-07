@@ -146,7 +146,7 @@ spec:
       - name: web
         image: chinna9967/web:1.0.0
         volumeMounts:
-        - name: nginx.conf # name of the volume
+        - name: nginx-conf # name of the volume
           mountPath: /etc/nginx/nginx.conf
           subPath: nginx.conf 
           readOnly: true
