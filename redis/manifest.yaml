@@ -1,42 +1,42 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongodb
+  name: redis
   namespace: roboshop
   labels: # deployment labels
-    app: mongodb
+    app: redis
     tier: db
     project: roboshop
 spec:
   replicas: 1
   selector:
     matchLabels:  # these labels shpuld match with pod labels
-      app: mongodb
+      app: redis
       tier: db
       project: roboshop
   template:
     metadata:
       labels:
-        app: mongodb
+        app: redis
         tier: db
         project: roboshop
     spec:
       containers:
-      - name: mongodb
-        image: chinna9967/mongodb:1.0.0
+      - name: redis
+        image: chinna9967/redis
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongodb
+  name: redis
   namespace: roboshop
 spec:
   selector:
-    app: mongodb
+    app: redis
     tier: db
     project: roboshop
   ports:
-  - name: mongodb-port
+  - name: redis-port
     protocol: TCP
-    port: 27017 # this port belongs to service
-    targetPort: 27017 # this port belongs to container
+    port: 6379 # this port belongs to service
+    targetPort: 6379 # this port belongs to container
