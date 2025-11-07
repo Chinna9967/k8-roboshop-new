@@ -1,27 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql
+  name: mongodb
   namespace: roboshop
-  labels: # deployment labels
-    app: mysql
+  labels:
+    app: mongodb
     tier: db
     project: roboshop
+spec:
+  replicas: 1
   selector:
-    matchLabels:  # these labels shpuld match with pod labels
-      app: mysql
+    matchLabels:
+      app: mongodb
       tier: db
       project: roboshop
   template:
     metadata:
       labels:
-        app: mysql
+        app: mongodb
         tier: db
         project: roboshop
     spec:
       containers:
-      - name: mysql
-        image: chinna9967/mysql:1.0.0
+      - name: mongodb
+        image: chinna9967/mongodb:1.0.0
         envFrom:
         - configMapRef:
             name: mysql
