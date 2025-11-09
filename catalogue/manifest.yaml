@@ -60,4 +60,23 @@ metadata:
 data:
   MONGO: "true"
   MONGO_URL: "mongodb://mongodb:27017/catalogue"  #protocol://svcname:svcport/schema
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: catalogue
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: catalogue
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 75
 
